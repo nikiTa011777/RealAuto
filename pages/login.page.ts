@@ -11,6 +11,7 @@ export class Login{
     private submitSelector = '#submit'
     private sucessMessageSelector = '.has-text-align-center'
     private logOutSelector = 'text=Log out'
+    private errorMessageSelector = '#error'
 
     async LoginPage(userName:string, password:string){
         await this.page.goto('/practice-test-login')
@@ -26,5 +27,10 @@ export class Login{
 
     async verifyLogOut(){
         await expect(this.page.locator(this.logOutSelector)).toBeVisible();
+    }
+
+    async verifyErrorMessage(){
+        await expect(this.page.locator(this.errorMessageSelector)).toBeVisible();
+        await expect(this.page.locator(this.errorMessageSelector)).toContainText(/Your username is invalid!/);
     }
 }
