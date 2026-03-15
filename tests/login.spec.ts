@@ -1,6 +1,6 @@
 import {test} from '@playwright/test'
 import { Login } from '../pages/login.page'
-import { InvalidUser, Users } from '../utils/testData'
+import { InvalidUser, Users, InvalidPassword} from '../utils/testData'
 
 test('Valid credentials',async({page})=>{
     const login = new Login(page)
@@ -14,4 +14,10 @@ test('Invalid Credentials',async({page})=>{
     await login.LoginPage(InvalidUser.Username,InvalidUser.password)
     await login.verifyErrorMessage();
     
+})
+
+test('Invalid Password',async({page})=>{
+    const login = new Login(page)
+    await login.LoginPage(InvalidPassword.Username,InvalidPassword.password)
+    await login.verifyPasswordErrorMessage();
 })

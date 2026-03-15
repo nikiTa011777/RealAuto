@@ -5,5 +5,10 @@ export const Users = {
 
 export const InvalidUser = {
     'Username' : 'Studentss',
-    'password' : "Password123"
+    'password' : 'Password123'
+}
+
+export const InvalidPassword = {
+    'Username' : 'student',
+    'password' : 'Student23'
 }

@@ -12,6 +12,7 @@ export class Login{
     private sucessMessageSelector = '.has-text-align-center'
     private logOutSelector = 'text=Log out'
     private errorMessageSelector = '#error'
+    private passworderrorSelector = '#error'
 
     async LoginPage(userName:string, password:string){
         await this.page.goto('/practice-test-login')
@@ -33,4 +34,11 @@ export class Login{
         await expect(this.page.locator(this.errorMessageSelector)).toBeVisible();
         await expect(this.page.locator(this.errorMessageSelector)).toContainText(/Your username is invalid!/);
     }
+
+    async verifyPasswordErrorMessage(){
+        await expect(this.page.locator(this.passworderrorSelector)).toBeVisible();
+        await expect(this.page.locator(this.passworderrorSelector)).toHaveText(/Your password is invalid!/);
+    }
+
+
 }
