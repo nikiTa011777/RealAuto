@@ -10,6 +10,7 @@ export class Login{
     private passwordSelector = '#password'
     private submitSelector = '#submit'
     private sucessMessageSelector = '.has-text-align-center'
+    private logOutSelector = 'text=Log out'
 
     async LoginPage(userName:string, password:string){
         await this.page.goto('/practice-test-login')
@@ -21,5 +22,9 @@ export class Login{
     async verifyLogin(){
         await expect(this.page).toHaveURL('/logged-in-successfully/')
         await expect(this.page.locator(this.sucessMessageSelector)).toContainText(/Congratulations student. You successfully logged in/);
+    }
+
+    async verifyLogOut(){
+        await expect(this.page.locator(this.logOutSelector)).toBeVisible();
     }
 }

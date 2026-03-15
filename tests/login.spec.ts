@@ -6,4 +6,5 @@ test('Valid credentials',async({page})=>{
     const login = new Login(page)
     await login.LoginPage(Users.UserName,Users.password)
     await login.verifyLogin()
+    await login.verifyLogOut()
 })
