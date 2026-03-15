@@ -1,0 +1,25 @@
+import {Page,expect} from '@playwright/test'
+
+export class Login{
+    readonly page : Page;
+
+    constructor(page: Page){
+        this.page = page;
+    }
+    private userNameSelector = '#username'
+    private passwordSelector = '#password'
+    private submitSelector = '#submit'
+    private sucessMessageSelector = '.has-text-align-center'
+
+    async LoginPage(userName:string, password:string){
+        await this.page.goto('/practice-test-login')
+        await this.page.fill(this.userNameSelector,userName)
+        await this.page.fill(this.passwordSelector,password)
+        await this.page.click(this.submitSelector)
+    }
+
+    async verifyLogin(){
+        await expect(this.page).toHaveURL('/logged-in-successfully/')
+        await expect(this.page.locator(this.sucessMessageSelector)).toContainText(/Congratulations student. You successfully logged in/);
+    }
+}
