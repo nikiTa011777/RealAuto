@@ -1,22 +1,40 @@
-import {Page,expect} from '@playwright/test'
+import { Page, expect } from '@playwright/test'
 
-export class AddButton{
-    readonly page : Page;
+export class AddButtonPage {
+    readonly page: Page;
 
-    constructor(page:Page){
+    constructor(page: Page) {
         this.page = page;
     }
 
     private AddSelector = '#add_btn'
-    private Row2Selector = '#confirmation'
+    private Row2Selector = '#row2 > input'
+    private editSelector = '#edit_btn'
 
-    async Add(){
-        await this.page.goto('/practice-test-exceptions/')
+
+    private SaveSelector = '#save_btn'
+    private SaveMessageSelector = '#confirmation'
+    private automa = '/practice-test-exceptions/'
+
+    async Add() {
+        await this.page.goto(this.automa)
         await this.page.click(this.AddSelector)
-    }
-    async VerifyRow2Added(){
-        await expect(this.page.locator(this.Row2Selector)).toBeVisible();
-    }
-}
 
-// practice-test-exceptions/
+    }
+
+    async VerifyRow2Added(fieldRow: string) {
+        try {
+            await this.page.locator(this.editSelector).click({ timeout: 9000 });
+        } catch (e) {
+            console.log("Edit button not present, continuing...");
+        }
+        
+
+        await this.page.locator(this.Row2Selector).fill(fieldRow);
+        await this.page.locator('#save_btn').last().click();
+    }   
+    async verifyMessage() {
+        await expect(this.page.locator(this.SaveMessageSelector)).toHaveText('Row 2 was saved');
+    }
+
+}
