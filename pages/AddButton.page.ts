@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test'
+import { Routes } from '../utils/routes';
 
 export class AddButtonPage {
     readonly page: Page;
@@ -14,10 +15,9 @@ export class AddButtonPage {
 
     private SaveSelector = '#save_btn'
     private SaveMessageSelector = '#confirmation'
-    private automa = '/practice-test-exceptions/'
 
     async Add() {
-        await this.page.goto(this.automa)
+        await this.page.goto(Routes.Exception)
         await this.page.click(this.AddSelector)
 
     }
@@ -31,7 +31,7 @@ export class AddButtonPage {
         
 
         await this.page.locator(this.Row2Selector).fill(fieldRow);
-        await this.page.locator('#save_btn').last().click();
+        await this.page.locator(this.SaveSelector).last().click();
     }   
     async verifyMessage() {
         await expect(this.page.locator(this.SaveMessageSelector)).toHaveText('Row 2 was saved');

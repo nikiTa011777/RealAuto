@@ -15,3 +15,7 @@ export const InvalidPassword = {
 export const row2FieldAdded = {
     'Row2' : 'input-field'
 }
+
+export const row1Field = {
+    'Row1' : 'Hello'
+}

@@ -1,4 +1,5 @@
 import {Page,expect} from '@playwright/test'
+import { Routes } from '../utils/routes';
 
 export class Login{
     readonly page : Page;
@@ -15,14 +16,14 @@ export class Login{
     private passworderrorSelector = '#error'
 
     async LoginPage(userName:string, password:string){
-        await this.page.goto('/practice-test-login')
+        await this.page.goto(Routes.loginAutomation)
         await this.page.fill(this.userNameSelector,userName)
         await this.page.fill(this.passwordSelector,password)
         await this.page.click(this.submitSelector)
     }
 
     async verifyLogin(){
-        await expect(this.page).toHaveURL('/logged-in-successfully/')
+        await expect(this.page).toHaveURL(Routes.verifying)
         await expect(this.page.locator(this.sucessMessageSelector)).toContainText(/Congratulations student. You successfully logged in/);
     }
 
@@ -37,7 +38,7 @@ export class Login{
 
     async verifyPasswordErrorMessage(){
         await expect(this.page.locator(this.passworderrorSelector)).toBeVisible();
-        await expect(this.page.locator(this.passworderrorSelector)).toHaveText(/Your password is invalid!/);
+        await expect(this.page.locator(this.passworderrorSelector)).toHaveText(/Your Password is Invalid!/)
     }
 
 
