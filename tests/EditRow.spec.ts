@@ -12,4 +12,6 @@ test('Edit Button',async({page})=>{
 test('Verifying instructions message disable',async({page})=>{
     const verifyingInstruct = new Instructions(page)
     await verifyingInstruct.instructions()
+    await verifyingInstruct.verifyInstructionMessage()
+
 })
